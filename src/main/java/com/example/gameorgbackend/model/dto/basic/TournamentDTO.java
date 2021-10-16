@@ -1,48 +1,34 @@
-package com.example.gameorgbackend.model.entity;
+package com.example.gameorgbackend.model.dto.basic;
 
+import com.example.gameorgbackend.model.entity.Team;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
-
-@Entity
 @Getter
 @Setter
-public class Tournament {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Setter(AccessLevel.NONE)
+public class TournamentDTO {
   private Long tournamentId;
 
-  @Column(nullable = false, length = 100, unique = true)
   private String name;
 
-  @Column(nullable = false)
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
   private Date tournamentStart;
 
-  @Column(nullable = false)
   @JsonFormat(pattern = "yyyy-MM-dd")
   private Date tournamentEnd;
 
-  @Column(nullable = false)
   private Integer maxTeamSize;
 
-  @Column(nullable = false)
   private Integer maxNumberOfTeams;
 
-  @Column(nullable = false)
   private Integer currentNumberOfTeams;
 
   private String regulations;
 
-  @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
   private Set<Team> teams = new HashSet<>();
 }
