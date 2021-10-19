@@ -1,7 +1,11 @@
 package com.example.gameorgbackend.controller;
 
+import com.example.gameorgbackend.model.dto.basic.GameAccountDTO;
+import com.example.gameorgbackend.model.dto.basic.TeamDTO;
 import com.example.gameorgbackend.model.dto.basic.TournamentDTO;
 import com.example.gameorgbackend.model.dto.specialized.TournamentFormDTO;
+import com.example.gameorgbackend.model.entity.Team;
+import com.example.gameorgbackend.model.service.TeamServiceImpl;
 import com.example.gameorgbackend.model.service.TournamentServiceImpl;
 import java.util.Collection;
 import org.modelmapper.ModelMapper;
@@ -18,11 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class TournamentController {
   private final ModelMapper modelMapper;
   private final TournamentServiceImpl tournamentService;
+  private final TeamServiceImpl teamService;
   public TournamentController(
       ModelMapper modelMapper,
-      TournamentServiceImpl tournamentService) {
+      TournamentServiceImpl tournamentService,
+      TeamServiceImpl teamService) {
     this.modelMapper = modelMapper;
     this.tournamentService = tournamentService;
+    this.teamService = teamService;
   }
 
   @GetMapping(value = "/getTournaments")
@@ -37,5 +44,16 @@ public class TournamentController {
     if(tournamentDTO == null)
       return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     return new ResponseEntity<>(tournamentDTO, HttpStatus.OK);
+  }
+
+  @PostMapping(value = "/addTeam")
+  public ResponseEntity<TeamDTO> addTeam(@RequestBody TeamDTO teamDTO) {
+    for(GameAccountDTO gameAccountDTO : teamDTO.getGameAccounts()) {
+      System.out.println(gameAccountDTO.getInGameName());
+    }
+    teamDTO = teamService.create(teamDTO);
+    if(teamDTO == null)
+      return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    return new ResponseEntity<>(teamDTO, HttpStatus.OK);
   }
 }

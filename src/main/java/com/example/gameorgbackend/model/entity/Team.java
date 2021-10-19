@@ -28,6 +28,7 @@ public class Team {
   @Column(length = 20)
   private String teamName;
 
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
   private Tournament tournament;
 

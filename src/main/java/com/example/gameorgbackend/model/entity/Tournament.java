@@ -1,6 +1,7 @@
 package com.example.gameorgbackend.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
@@ -42,6 +43,10 @@ public class Tournament {
   private Integer currentNumberOfTeams;
 
   private String regulations;
+
+  @JsonIgnoreProperties("tournaments")
+  @ManyToOne(fetch = FetchType.LAZY)
+  private User organizer;
 
   @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
   private Set<Team> teams = new HashSet<>();

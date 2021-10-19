@@ -1,8 +1,9 @@
 package com.example.gameorgbackend.model.dto.basic;
 
 import com.example.gameorgbackend.model.entity.Team;
+import com.example.gameorgbackend.model.entity.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TournamentDTO {
+
   private Long tournamentId;
 
   private String name;
@@ -30,5 +32,8 @@ public class TournamentDTO {
 
   private String regulations;
 
-  private Set<Team> teams = new HashSet<>();
+  @JsonIgnoreProperties("tournaments")
+  private UserDTO organizer;
+
+  private Set<TeamDTO> teams = new HashSet<>();
 }

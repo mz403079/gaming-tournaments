@@ -1,24 +1,32 @@
-package com.example.gameorgbackend.model.entity;
-import com.fasterxml.jackson.annotation.JsonFormat;
+package com.example.gameorgbackend.model.dto.basic;
+
+import com.example.gameorgbackend.model.entity.Contact;
+import com.example.gameorgbackend.model.entity.GameAccount;
+import com.example.gameorgbackend.model.entity.Role;
+import com.example.gameorgbackend.model.entity.Tournament;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
-
-@Entity
 @Getter
 @Setter
-@Table(name = "\"user\"")
-public class User {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Setter(AccessLevel.NONE)
+public class UserDTO {
+
   private Long userId;
 
   @Column(nullable = false, length = 50, unique = true)
@@ -38,20 +46,17 @@ public class User {
   @Column(nullable = false, length = 50)
   private String surname;
 
-  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-  private Contact contact;
+  private ContactDTO contact;
 
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-  private Set<GameAccount> gameAccounts = new HashSet<>();
+  private Set<GameAccountDTO> gameAccounts;
 
   @JsonIgnoreProperties("organizer")
-  @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-  private Set<Tournament> tournaments = new HashSet<>();;
+  private Set<TournamentDTO> tournaments;
 
   @Column(nullable = false)
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "user_roles",
       joinColumns = @JoinColumn(name = "user_id"),
       inverseJoinColumns = @JoinColumn(name = "role_id"))
-  private Set<Role> Roles = new HashSet<>();
+  private Set<Role> Roles;
 }

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,12 +25,11 @@ public class GameAccount {
   private String inGameName;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  private Tournament tournament;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  private Team team;
-
-  @ManyToOne
   private User user;
 
+  @OneToOne
+  private Game game;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  private  Team team;
 }

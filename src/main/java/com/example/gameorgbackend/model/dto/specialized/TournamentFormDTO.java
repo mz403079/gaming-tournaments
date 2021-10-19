@@ -1,5 +1,6 @@
 package com.example.gameorgbackend.model.dto.specialized;
 
+import com.example.gameorgbackend.model.dto.basic.UserDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -24,4 +25,5 @@ public class TournamentFormDTO {
 
   private String regulations;
 
+  private UserDTO organizer;
 }
