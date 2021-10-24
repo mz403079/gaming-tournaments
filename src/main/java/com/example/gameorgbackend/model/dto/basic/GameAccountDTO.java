@@ -14,7 +14,7 @@ public class GameAccountDTO {
 
   private TeamDTO team;
 
-  private GameDTO gameDTO;
+  private GameDTO game;
 
   private UserDTO user;
 }
