@@ -1,9 +1,12 @@
 package com.example.gameorgbackend.model.dto.basic;
 
 import com.example.gameorgbackend.model.entity.Tournament;
+import com.example.gameorgbackend.model.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,8 +18,9 @@ public class TeamDTO {
 
   private String teamName;
 
-  @JsonIgnore
-  private Tournament tournament;
+  @JsonIgnoreProperties({"teams", "organizer"})
+  private TournamentDTO tournament;
 
-  private Set<GameAccountDTO> gameAccounts = new HashSet<>();
+  @JsonIgnoreProperties({"teams","tournaments"})
+  private Set<UserDTO> players = new HashSet<>();
 }

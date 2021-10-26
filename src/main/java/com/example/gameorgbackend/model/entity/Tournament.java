@@ -44,10 +44,11 @@ public class Tournament {
 
   private String regulations;
 
-  @JsonIgnoreProperties("tournaments")
+  @JsonIgnoreProperties({"tournaments","gameAccounts","teams"})
   @ManyToOne(fetch = FetchType.LAZY)
   private User organizer;
 
+  @JsonIgnoreProperties("tournament")
   @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
   private Set<Team> teams = new HashSet<>();
 }

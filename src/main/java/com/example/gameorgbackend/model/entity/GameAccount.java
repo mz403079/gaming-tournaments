@@ -1,5 +1,6 @@
 package com.example.gameorgbackend.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,12 +25,11 @@ public class GameAccount {
   @Column(nullable = false, length = 100)
   private String inGameName;
 
+  @JsonIgnoreProperties("gameAccounts")
   @ManyToOne(fetch = FetchType.LAZY)
   private User user;
 
   @OneToOne
   private Game game;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  private  Team team;
 }

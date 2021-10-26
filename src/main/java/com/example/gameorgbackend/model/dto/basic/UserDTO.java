@@ -3,6 +3,7 @@ package com.example.gameorgbackend.model.dto.basic;
 import com.example.gameorgbackend.model.entity.Contact;
 import com.example.gameorgbackend.model.entity.GameAccount;
 import com.example.gameorgbackend.model.entity.Role;
+import com.example.gameorgbackend.model.entity.Team;
 import com.example.gameorgbackend.model.entity.Tournament;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -48,10 +49,14 @@ public class UserDTO {
 
   private ContactDTO contact;
 
+  @JsonIgnoreProperties("user")
   private Set<GameAccountDTO> gameAccounts;
 
   @JsonIgnoreProperties("organizer")
   private Set<TournamentDTO> tournaments;
+
+  @JsonIgnoreProperties("players")
+  private  Set<TeamDTO> teams;
 
   @Column(nullable = false)
   @ManyToMany(fetch = FetchType.LAZY)

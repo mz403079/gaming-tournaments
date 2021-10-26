@@ -1,6 +1,7 @@
 package com.example.gameorgbackend.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -10,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.AccessLevel;
@@ -28,10 +30,11 @@ public class Team {
   @Column(length = 20)
   private String teamName;
 
-  @JsonIgnore
+  @JsonIgnoreProperties({"teams", "organizer"})
   @ManyToOne(fetch = FetchType.LAZY)
   private Tournament tournament;
 
-  @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-  private Set<GameAccount> gameAccounts = new HashSet<>();
+  @JsonIgnoreProperties({"teams","tournaments"})
+  @ManyToMany(mappedBy = "teams", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+  private Set<User> players = new HashSet<>();
 }

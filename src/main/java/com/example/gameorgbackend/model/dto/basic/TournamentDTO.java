@@ -32,8 +32,9 @@ public class TournamentDTO {
 
   private String regulations;
 
-  @JsonIgnoreProperties("tournaments")
+  @JsonIgnoreProperties({"tournaments","gameAccounts","teams"})
   private UserDTO organizer;
 
+  @JsonIgnoreProperties("tournament")
   private Set<TeamDTO> teams = new HashSet<>();
 }
