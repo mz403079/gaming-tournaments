@@ -33,7 +33,7 @@ public class UserDTO {
   @Column(nullable = false, length = 50, unique = true)
   private String username;
 
-  @Column(nullable = false, length = 16)
+  @Column(nullable = false)
   @JsonIgnore
   private String password;
 
