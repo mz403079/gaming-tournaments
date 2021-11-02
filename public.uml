@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.SCHEMA:d3pt08gutsqddk.public</OriginalElement>
+  <nodes>
+    <node x="0.0" y="226.0">2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.role</node>
+    <node x="166.5" y="689.0">2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.team</node>
+    <node x="480.9375" y="226.0">2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.game</node>
+    <node x="167.0" y="408.0">2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.tournament</node>
+    <node x="262.5" y="838.0">2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.user_teams</node>
+    <node x="252.0" y="171.0">2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.user</node>
+    <node x="409.6875" y="463.0">2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.game_account</node>
+    <node x="248.0" y="0.0">2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.contact</node>
+    <node x="35.0" y="485.5">2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.user_roles</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.team" target="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.tournament">
+      <point x="0.0" y="-49.5" />
+      <point x="0.0" y="115.5" />
+    </edge>
+    <edge source="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.tournament" target="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.user">
+      <point x="0.0" y="-115.5" />
+      <point x="277.0" y="388.0" />
+      <point x="316.125" y="388.0" />
+      <point x="-21.375" y="93.5" />
+    </edge>
+    <edge source="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.user_roles" target="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.role">
+      <point x="-28.0" y="-38.0" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.game_account" target="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.user">
+      <point x="-45.75" y="-60.5" />
+      <point x="455.4375" y="378.0" />
+      <point x="401.625" y="378.0" />
+      <point x="64.125" y="93.5" />
+    </edge>
+    <edge source="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.user_teams" target="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.team">
+      <point x="-37.5" y="-38.0" />
+      <point x="300.0" y="813.0" />
+      <point x="277.0" y="813.0" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.user_roles" target="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.user">
+      <point x="28.0" y="-38.0" />
+      <point x="119.0" y="378.0" />
+      <point x="273.375" y="378.0" />
+      <point x="-64.125" y="93.5" />
+    </edge>
+    <edge source="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.game_account" target="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.game">
+      <point x="45.75" y="-60.5" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.user" target="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.contact">
+      <point x="0.0" y="-93.5" />
+      <point x="0.0" y="60.5" />
+    </edge>
+    <edge source="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.user_teams" target="2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.user">
+      <point x="37.5" y="-38.0" />
+      <point x="375.0" y="813.0" />
+      <point x="398.0" y="813.0" />
+      <point x="398.0" y="388.0" />
+      <point x="358.875" y="388.0" />
+      <point x="21.375" y="93.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8458244111349036" x="309.5" y="457.00000000000006" />
+  <SelectedNodes>
+    <node>2c2bdb6c-6aee-45f5-b0ae-e40e9de2ecc7.TABLE:d3pt08gutsqddk.public.user_roles</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+
