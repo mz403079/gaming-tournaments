@@ -1,7 +1,4 @@
 package com.example.gameorgbackend.model.dto.basic;
-
-import com.example.gameorgbackend.model.entity.Team;
-import com.example.gameorgbackend.model.entity.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
@@ -27,6 +24,8 @@ public class TournamentDTO {
   private Date tournamentEnd;
 
   private Integer reward;
+
+  private boolean isLan;
 
   private Integer maxTeamSize;
 

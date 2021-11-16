@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Set;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -58,5 +59,11 @@ public class TournamentServiceImpl implements IService<TournamentDTO> {
   @Override
   public void delete(TournamentDTO tournamentDTO) {
 
+  }
+
+  public Collection<TournamentDTO> getAllQuery(Specification<Tournament> specs) {
+    return modelMapper.map(tournamentRepository.findAll(Specification.where(specs)),
+        new TypeToken<Set<TournamentDTO>>(){
+        }.getType());
   }
 }

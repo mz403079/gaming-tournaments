@@ -11,7 +11,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Getter
@@ -25,10 +24,16 @@ public class Tournament {
   @Column(nullable = false, length = 100, unique = true)
   private String name;
 
-  @Column(nullable = false)
   private String description;
 
   private Integer reward;
+
+  @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+  private boolean isLan;
+
+  private String city;
+
+  private String street;
 
   @Column(nullable = false)
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
