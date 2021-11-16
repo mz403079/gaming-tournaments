@@ -46,7 +46,7 @@ public class TournamentController {
     this.tournamentRepository = tournamentRepository;
   }
 
-  @GetMapping("/tournaments/searchUrl")
+  @GetMapping("/tournaments/query")
   public ResponseEntity<Collection<TournamentDTO>> getTournamentsFilter(
       @SearchSpec Specification<Tournament> specs) {
     Collection<TournamentDTO> tournaments = tournamentService.getAllQuery(specs);
