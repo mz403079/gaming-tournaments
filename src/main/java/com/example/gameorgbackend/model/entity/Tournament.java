@@ -26,6 +26,11 @@ public class Tournament {
   private String name;
 
   @Column(nullable = false)
+  private String description;
+
+  private Integer reward;
+
+  @Column(nullable = false)
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
   private Date tournamentStart;
 
@@ -42,7 +47,7 @@ public class Tournament {
   @Column(nullable = false)
   private Integer currentNumberOfTeams;
 
-  private String regulations;
+  private String rules;
 
   @JsonIgnoreProperties({"tournaments","gameAccounts","teams"})
   @ManyToOne(fetch = FetchType.LAZY)

@@ -18,11 +18,15 @@ public class TournamentDTO {
 
   private String name;
 
+  private String description;
+
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
   private Date tournamentStart;
 
   @JsonFormat(pattern = "yyyy-MM-dd")
   private Date tournamentEnd;
+
+  private Integer reward;
 
   private Integer maxTeamSize;
 
@@ -30,7 +34,7 @@ public class TournamentDTO {
 
   private Integer currentNumberOfTeams;
 
-  private String regulations;
+  private String rules;
 
   @JsonIgnoreProperties({"tournaments","gameAccounts","teams"})
   private UserDTO organizer;
