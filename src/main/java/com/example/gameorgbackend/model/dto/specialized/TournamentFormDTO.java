@@ -28,6 +28,10 @@ public class TournamentFormDTO {
 
   private Integer maxNumberOfTeams;
 
+  private String city;
+
+  private String street;
+
   private String rules;
 
   private UserDTO organizer;
