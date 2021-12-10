@@ -2,6 +2,7 @@ package com.example.gameorgbackend.model.service;
 
 import com.example.gameorgbackend.exceptions.DataNotFoundException;
 import com.example.gameorgbackend.model.dto.basic.UserDTO;
+import com.example.gameorgbackend.model.dto.specialized.UserInfoDTO;
 import com.example.gameorgbackend.model.entity.ERole;
 import com.example.gameorgbackend.model.entity.Role;
 import com.example.gameorgbackend.model.entity.User;
@@ -36,6 +37,14 @@ public class UserServiceImpl implements IService<UserDTO> {
     return null;
   }
 
+  public UserInfoDTO getUserInfo(Long id) {
+    try {
+      return modelMapper.map(userRepository.findById(id).orElseThrow(
+          DataNotFoundException::new), UserInfoDTO.class);
+    } catch(Exception e) {
+      return null;
+    }
+  }
   public UserDTO getByUsername(String username) {
     return modelMapper.map(userRepository.findByUsername(username).orElseThrow(
         DataNotFoundException::new), UserDTO.class);
@@ -63,6 +72,17 @@ public class UserServiceImpl implements IService<UserDTO> {
     return null;
   }
 
+  public UserInfoDTO update(UserInfoDTO userInfoDTO, Long userId) {
+    try {
+      User user = userRepository.findById(userId).orElseThrow(DataNotFoundException::new);
+      user.setName(userInfoDTO.getName());
+      user.setSurname(userInfoDTO.getSurname());
+      userRepository.save(user);
+      return userInfoDTO;
+    } catch(Exception e) {
+      return null;
+    }
+  }
   @Override
   public void delete(UserDTO userDTO) {
 
