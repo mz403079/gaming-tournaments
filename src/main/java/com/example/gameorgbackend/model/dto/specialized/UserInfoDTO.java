@@ -12,5 +12,5 @@ public class UserInfoDTO {
 
   String surname;
 
-  ContactDTO contactDTO;
+  ContactDTO contact;
 }
