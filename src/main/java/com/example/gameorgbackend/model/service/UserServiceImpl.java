@@ -82,12 +82,11 @@ public class UserServiceImpl implements IService<UserDTO> {
         Contact contact = new Contact();
         user.setContact(contact);
       }
-      if (userRepository.existsByEmail(userInfoDTO.getContact().getEmailAddress())
-      ) {
-        System.out.println("OMEGA");
+      if (userRepository.existsByEmail(userInfoDTO.getEmail()) &&
+          !userId.equals(user.getUserId()))
         return null;
-      }
-      user.setEmail(userInfoDTO.getContact().getEmailAddress());
+
+      user.setEmail(userInfoDTO.getEmail());
       user.getContact().setDiscordName(userInfoDTO.getContact().getDiscordName());
       user.getContact().setPhoneNumber(userInfoDTO.getContact().getPhoneNumber());
       userRepository.save(user);
