@@ -3,6 +3,7 @@ package com.example.gameorgbackend.model.service;
 import com.example.gameorgbackend.exceptions.DataNotFoundException;
 import com.example.gameorgbackend.model.dto.basic.UserDTO;
 import com.example.gameorgbackend.model.dto.specialized.UserInfoDTO;
+import com.example.gameorgbackend.model.entity.Contact;
 import com.example.gameorgbackend.model.entity.ERole;
 import com.example.gameorgbackend.model.entity.Role;
 import com.example.gameorgbackend.model.entity.User;
@@ -77,6 +78,16 @@ public class UserServiceImpl implements IService<UserDTO> {
       User user = userRepository.findById(userId).orElseThrow(DataNotFoundException::new);
       user.setName(userInfoDTO.getName());
       user.setSurname(userInfoDTO.getSurname());
+      if(user.getContact() == null) {
+        Contact contact = new Contact();
+        //Currently DiscordName isn't used
+        contact.setDiscordName("");
+        user.setContact(contact);
+      }
+      if (userRepository.existsByEmail(userInfoDTO.getContact().getEmailAddress()))
+        return null;
+      user.getContact().setEmailAddress(userInfoDTO.getContact().getEmailAddress());
+      user.getContact().setPhoneNumber(userInfoDTO.getContact().getPhoneNumber());
       userRepository.save(user);
       return userInfoDTO;
     } catch(Exception e) {
