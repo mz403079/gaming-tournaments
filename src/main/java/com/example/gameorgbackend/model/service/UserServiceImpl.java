@@ -80,13 +80,12 @@ public class UserServiceImpl implements IService<UserDTO> {
       user.setSurname(userInfoDTO.getSurname());
       if(user.getContact() == null) {
         Contact contact = new Contact();
-        //Currently DiscordName isn't used
-        contact.setDiscordName("");
         user.setContact(contact);
       }
       if (userRepository.existsByEmail(userInfoDTO.getContact().getEmailAddress()))
         return null;
       user.getContact().setEmailAddress(userInfoDTO.getContact().getEmailAddress());
+      user.getContact().setDiscordName(userInfoDTO.getContact().getDiscordName());
       user.getContact().setPhoneNumber(userInfoDTO.getContact().getPhoneNumber());
       userRepository.save(user);
       return userInfoDTO;
