@@ -12,5 +12,7 @@ public class UserInfoDTO {
 
   String surname;
 
+  String email;
+
   ContactDTO contact;
 }
