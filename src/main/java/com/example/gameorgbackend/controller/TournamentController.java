@@ -18,6 +18,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,5 +80,12 @@ public class TournamentController {
     if(teamDTO == null)
       return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     return new ResponseEntity<>(teamDTO, HttpStatus.OK);
+  }
+
+  @PostMapping(value = "/endTournament/{tournamentId}/{teamId}")
+  public ResponseEntity<String> endTournament(@PathVariable Long tournamentId,
+      @PathVariable Long teamId) {
+    tournamentService.endTournament(tournamentId, teamId);
+    return new ResponseEntity<>("Success", HttpStatus.OK);
   }
 }

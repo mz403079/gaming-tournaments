@@ -49,6 +49,8 @@ public class UserDTO {
 
   private ContactDTO contact;
 
+  private Integer crowns;
+
   @JsonIgnoreProperties("user")
   private Set<GameAccountDTO> gameAccounts;
 

@@ -41,6 +41,8 @@ public class User {
   @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
   private Contact contact;
 
+  private Integer crowns;
+
   @JsonIgnoreProperties("user")
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
   private Set<GameAccount> gameAccounts = new HashSet<>();

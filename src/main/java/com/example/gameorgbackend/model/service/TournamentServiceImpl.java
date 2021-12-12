@@ -2,8 +2,10 @@ package com.example.gameorgbackend.model.service;
 
 import com.example.gameorgbackend.exceptions.DataNotFoundException;
 import com.example.gameorgbackend.model.dto.basic.TournamentDTO;
+import com.example.gameorgbackend.model.entity.Team;
 import com.example.gameorgbackend.model.entity.Tournament;
 import com.example.gameorgbackend.model.entity.User;
+import com.example.gameorgbackend.model.repository.TeamRepository;
 import com.example.gameorgbackend.model.repository.TournamentRepository;
 import com.example.gameorgbackend.model.repository.UserRepository;
 import java.util.Collection;
@@ -19,12 +21,16 @@ public class TournamentServiceImpl implements IService<TournamentDTO> {
   private final ModelMapper modelMapper;
   private final TournamentRepository tournamentRepository;
   private final UserRepository userRepository;
+  private final TeamRepository teamRepository;
 
   public TournamentServiceImpl(ModelMapper modelMapper, TournamentRepository tournamentRepository,
-      UserRepository userRepository) {
+      UserRepository userRepository,
+      TeamRepository teamRepository) {
     this.modelMapper = modelMapper;
     this.tournamentRepository = tournamentRepository;
     this.userRepository = userRepository;
+    this.teamRepository = teamRepository;
+
   }
 
   @Override
@@ -65,5 +71,17 @@ public class TournamentServiceImpl implements IService<TournamentDTO> {
     return modelMapper.map(tournamentRepository.findAll(Specification.where(specs)),
         new TypeToken<Set<TournamentDTO>>(){
         }.getType());
+  }
+
+  public void endTournament(Long tournamentId, Long teamId) {
+    Tournament tournament = tournamentRepository.findById(tournamentId)
+        .orElseThrow(DataNotFoundException::new);
+    Team team = teamRepository.findById(teamId).orElseThrow(DataNotFoundException::new);
+    for (User player : team.getPlayers()) {
+      player.setCrowns(player.getCrowns()+tournament.getReward());
+      userRepository.save(player);
+    }
+    tournament.setWinner(team.getTeamName());
+    tournamentRepository.save(tournament);
   }
 }

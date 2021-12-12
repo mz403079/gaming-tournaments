@@ -54,6 +54,8 @@ public class Tournament {
 
   private String rules;
 
+  private String winner;
+
   @JsonIgnoreProperties({"tournaments","gameAccounts","teams"})
   @ManyToOne(fetch = FetchType.LAZY)
   private User organizer;
