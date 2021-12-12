@@ -2,12 +2,15 @@ package com.example.gameorgbackend.model.service;
 
 import com.example.gameorgbackend.exceptions.DataNotFoundException;
 import com.example.gameorgbackend.model.dto.basic.GameAccountDTO;
+import com.example.gameorgbackend.model.dto.basic.TournamentDTO;
 import com.example.gameorgbackend.model.entity.GameAccount;
 import com.example.gameorgbackend.model.entity.User;
 import com.example.gameorgbackend.model.repository.GameAccountRepository;
 import com.example.gameorgbackend.model.repository.UserRepository;
 import java.util.Collection;
+import java.util.Set;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,10 +37,18 @@ public class GameAccountServiceImpl implements IService<GameAccountDTO> {
     return null;
   }
 
+  public Collection<GameAccountDTO> getAll(Long id) {
+    return modelMapper.map(gameAccountRepository.findByUserUserId(id),
+        new TypeToken<Set<GameAccountDTO>>(){
+        }.getType());
+  }
   @Override
   public GameAccountDTO create(GameAccountDTO gameAccountDTO) {
+    return null;
+  }
+  public GameAccountDTO create(GameAccountDTO gameAccountDTO, Long id) {
     GameAccount gameAccount = modelMapper.map(gameAccountDTO,GameAccount.class);
-    User user = userRepository.findById(gameAccountDTO.getUser().getUserId()).orElseThrow(
+    User user = userRepository.findById(id).orElseThrow(
         DataNotFoundException::new);
     gameAccount.setUser(user);
     if(gameAccountRepository.existsByInGameNameAndGameName(gameAccount.getInGameName(), gameAccount.getGame().getName()))
@@ -47,7 +58,6 @@ public class GameAccountServiceImpl implements IService<GameAccountDTO> {
     gameAccountRepository.save(gameAccount);
     return gameAccountDTO;
   }
-
   @Override
   public GameAccountDTO update(GameAccountDTO gameAccountDTO) {
     return null;

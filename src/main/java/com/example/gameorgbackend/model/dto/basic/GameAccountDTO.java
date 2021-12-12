@@ -16,7 +16,4 @@ public class GameAccountDTO {
   private TeamDTO team;
 
   private GameDTO game;
-
-  @JsonIgnoreProperties("gameAccounts")
-  private UserDTO user;
 }
