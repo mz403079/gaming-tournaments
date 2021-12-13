@@ -32,6 +32,10 @@ public class TournamentFormDTO {
 
   private String street;
 
+  private Double lat;
+
+  private Double lng;
+
   private String rules;
 
   private UserDTO organizer;
