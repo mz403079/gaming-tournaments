@@ -1,7 +1,10 @@
 package com.example.gameorgbackend.controller;
 
 import com.example.gameorgbackend.model.dto.basic.GameAccountDTO;
+import com.example.gameorgbackend.model.dto.basic.GameDTO;
 import com.example.gameorgbackend.model.dto.basic.TournamentDTO;
+import com.example.gameorgbackend.model.dto.basic.UserDTO;
+import com.example.gameorgbackend.model.dto.basic.UserRankingDTO;
 import com.example.gameorgbackend.model.dto.specialized.UserInfoDTO;
 import com.example.gameorgbackend.model.service.UserServiceImpl;
 import java.util.Collection;
@@ -36,5 +39,11 @@ public class UserController {
   public ResponseEntity<UserInfoDTO> getUserInfo(@PathVariable("id") Long id) {
     UserInfoDTO userInfoDTO = userService.getUserInfo(id);
     return new ResponseEntity<>(userInfoDTO, HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/getRanking")
+  public ResponseEntity<Collection<UserRankingDTO>> getRanking() {
+    Collection<UserRankingDTO> users = userService.getRanking();
+    return new ResponseEntity<>(users, HttpStatus.OK);
   }
 }

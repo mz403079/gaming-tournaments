@@ -1,7 +1,9 @@
 package com.example.gameorgbackend.model.service;
 
 import com.example.gameorgbackend.exceptions.DataNotFoundException;
+import com.example.gameorgbackend.model.dto.basic.GameDTO;
 import com.example.gameorgbackend.model.dto.basic.UserDTO;
+import com.example.gameorgbackend.model.dto.basic.UserRankingDTO;
 import com.example.gameorgbackend.model.dto.specialized.UserInfoDTO;
 import com.example.gameorgbackend.model.entity.Contact;
 import com.example.gameorgbackend.model.entity.ERole;
@@ -11,9 +13,12 @@ import com.example.gameorgbackend.model.repository.RoleRepository;
 import com.example.gameorgbackend.model.repository.UserRepository;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +59,11 @@ public class UserServiceImpl implements IService<UserDTO> {
   public Collection<UserDTO> getAll() {
     return null;
   }
-
+  public Collection<UserRankingDTO> getRanking() {
+    return modelMapper.map(userRepository.findAll((Sort.by(Sort.Direction.DESC, "crowns"))),
+        new TypeToken<List<UserRankingDTO>>(){
+        }.getType());
+  }
   @Override
   public UserDTO create(UserDTO userDTO) {
     User user = modelMapper.map(userDTO, User.class);
