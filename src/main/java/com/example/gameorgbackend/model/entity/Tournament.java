@@ -56,6 +56,10 @@ public class Tournament {
 
   private String winner;
 
+  private Double lat;
+
+  private Double lng;
+
   @JsonIgnoreProperties({"tournaments","gameAccounts","teams"})
   @ManyToOne(fetch = FetchType.LAZY)
   private User organizer;
