@@ -8,9 +8,11 @@ import com.example.gameorgbackend.model.entity.User;
 import com.example.gameorgbackend.model.repository.GameAccountRepository;
 import com.example.gameorgbackend.model.repository.UserRepository;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -38,8 +40,9 @@ public class GameAccountServiceImpl implements IService<GameAccountDTO> {
   }
 
   public Collection<GameAccountDTO> getAll(Long id) {
-    return modelMapper.map(gameAccountRepository.findByUserUserId(id),
-        new TypeToken<Set<GameAccountDTO>>(){
+    return modelMapper.map(gameAccountRepository.findByUserUserId(id, (Sort
+            .by(Sort.Direction.ASC, "gameAccountId"))),
+        new TypeToken<List<GameAccountDTO>>(){
         }.getType());
   }
   @Override

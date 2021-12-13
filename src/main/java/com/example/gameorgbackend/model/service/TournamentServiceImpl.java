@@ -9,9 +9,11 @@ import com.example.gameorgbackend.model.repository.TeamRepository;
 import com.example.gameorgbackend.model.repository.TournamentRepository;
 import com.example.gameorgbackend.model.repository.UserRepository;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -40,8 +42,8 @@ public class TournamentServiceImpl implements IService<TournamentDTO> {
 
   @Override
   public Collection<TournamentDTO> getAll() {
-    return modelMapper.map(tournamentRepository.findAll(),
-        new TypeToken<Set<TournamentDTO>>(){
+    return modelMapper.map(tournamentRepository.findAll((Sort.by(Sort.Direction.ASC, "tournamentStart"))),
+        new TypeToken<List<TournamentDTO>>(){
         }.getType());
   }
 
