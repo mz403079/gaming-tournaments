@@ -37,6 +37,10 @@ public class TournamentDTO {
 
   private String winner;
 
+  private String city;
+
+  private String street;
+
   @JsonIgnoreProperties({"tournaments","gameAccounts","teams"})
   private UserDTO organizer;
 

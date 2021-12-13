@@ -67,4 +67,10 @@ public class GameAccountServiceImpl implements IService<GameAccountDTO> {
   public void delete(GameAccountDTO gameAccountDTO) {
 
   }
+
+  public void delete(Long id) {
+    GameAccount gameAccount = gameAccountRepository.findById(id).orElseThrow(
+        DataNotFoundException::new);
+    gameAccountRepository.delete(gameAccount);
+  }
 }
