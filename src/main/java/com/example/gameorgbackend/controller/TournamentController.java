@@ -3,6 +3,7 @@ package com.example.gameorgbackend.controller;
 import com.example.gameorgbackend.model.dto.basic.TeamDTO;
 import com.example.gameorgbackend.model.dto.basic.TournamentDTO;
 import com.example.gameorgbackend.model.dto.basic.UserDTO;
+import com.example.gameorgbackend.model.dto.specialized.MessageResponse;
 import com.example.gameorgbackend.model.dto.specialized.TeamFormDTO;
 import com.example.gameorgbackend.model.dto.specialized.TournamentFormDTO;
 import com.example.gameorgbackend.model.entity.Tournament;
@@ -69,7 +70,7 @@ public class TournamentController {
   }
 
   @PostMapping(value = "/addTeam")
-  public ResponseEntity<String> addTeam(@RequestBody TeamFormDTO teamFormDTO) {
+  public ResponseEntity<MessageResponse> addTeam(@RequestBody TeamFormDTO teamFormDTO) {
     TeamDTO teamDTO = modelMapper.map(teamFormDTO, TeamDTO.class);
     Set<UserDTO> players = new HashSet<>();
     for (String name : teamFormDTO.getPlayers()) {
@@ -78,8 +79,8 @@ public class TournamentController {
     teamDTO.setPlayers(players);
     String result = teamService.createGetRes(teamDTO);
     if(!result.equals("ok"))
-      return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
-    return new ResponseEntity<>(result, HttpStatus.OK);
+      return new ResponseEntity<>(new MessageResponse(result), HttpStatus.BAD_REQUEST);
+    return new ResponseEntity<>(new MessageResponse(result), HttpStatus.OK);
   }
 
   @PostMapping(value = "/endTournament/{tournamentId}/{teamId}")
