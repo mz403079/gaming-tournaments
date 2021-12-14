@@ -18,5 +18,5 @@ public class TeamFormDTO {
 //  @JsonIgnore
   private TournamentDTO tournament;
 
-  private Set<PlayerDTO> players = new HashSet<>();
+  private Set<String> players = new HashSet<>();
 }
