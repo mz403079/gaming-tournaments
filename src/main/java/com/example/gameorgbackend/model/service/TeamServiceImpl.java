@@ -44,23 +44,31 @@ public class TeamServiceImpl implements IService<TeamDTO>{
 
   @Override
   public TeamDTO create(TeamDTO teamDTO) {
-    Team team = modelMapper.map(teamDTO, Team.class);
-    team.setTournament(tournamentRepository.findById(teamDTO.getTournament().getTournamentId()).orElseThrow(
-        DataNotFoundException::new));
-    Set<User> players = new HashSet<>();
-    for (UserDTO player : teamDTO.getPlayers()) {
-      players.add(userRepository.findById(player.getUserId()).orElseThrow(
-          DataNotFoundException::new));
-    }
-    team.setPlayers(players);
-    if(teamRepository.existsByTeamName(team.getTeamName()))
-      return null;
-    for(User player : team.getPlayers()) {
-      player.addTeam(team);
-    }
-    teamRepository.save(team);
+    return null;
+  }
+  public String createGetRes(TeamDTO teamDTO) {
+    try {
+      Team team = modelMapper.map(teamDTO, Team.class);
+      team.setTournament(
+          tournamentRepository.findById(teamDTO.getTournament().getTournamentId()).orElseThrow(
+              DataNotFoundException::new));
+      Set<User> players = new HashSet<>();
+      for (UserDTO player : teamDTO.getPlayers()) {
+        players.add(userRepository.findById(player.getUserId()).orElseThrow(
+            DataNotFoundException::new));
+      }
+      team.setPlayers(players);
+      if (teamRepository.existsByTeamName(team.getTeamName()))
+        return "team exists";
+      for (User player : team.getPlayers()) {
+        player.addTeam(team);
+      }
+      teamRepository.save(team);
 
-    return teamDTO;
+      return "ok";
+    }catch(Exception e) {
+      return "no user";
+    }
   }
 
   @Override

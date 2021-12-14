@@ -69,17 +69,17 @@ public class TournamentController {
   }
 
   @PostMapping(value = "/addTeam")
-  public ResponseEntity<TeamDTO> addTeam(@RequestBody TeamFormDTO teamFormDTO) {
+  public ResponseEntity<String> addTeam(@RequestBody TeamFormDTO teamFormDTO) {
     TeamDTO teamDTO = modelMapper.map(teamFormDTO, TeamDTO.class);
     Set<UserDTO> players = new HashSet<>();
     for (String name : teamFormDTO.getPlayers()) {
       players.add(userService.getByUsername(name));
     }
     teamDTO.setPlayers(players);
-    teamDTO = teamService.create(teamDTO);
-    if(teamDTO == null)
-      return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-    return new ResponseEntity<>(teamDTO, HttpStatus.OK);
+    String result = teamService.createGetRes(teamDTO);
+    if(!result.equals("ok"))
+      return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+    return new ResponseEntity<>(result, HttpStatus.OK);
   }
 
   @PostMapping(value = "/endTournament/{tournamentId}/{teamId}")
