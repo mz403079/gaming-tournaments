@@ -74,7 +74,10 @@ public class TournamentController {
     TeamDTO teamDTO = modelMapper.map(teamFormDTO, TeamDTO.class);
     Set<UserDTO> players = new HashSet<>();
     for (String name : teamFormDTO.getPlayers()) {
-      players.add(userService.getByUsername(name));
+      UserDTO player = userService.getByUsername(name);
+      if(player == null)
+        return new ResponseEntity<>(new MessageResponse("no user"), HttpStatus.BAD_REQUEST);
+      players.add(player);
     }
     teamDTO.setPlayers(players);
     String result = teamService.createGetRes(teamDTO);

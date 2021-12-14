@@ -52,8 +52,12 @@ public class UserServiceImpl implements IService<UserDTO> {
     }
   }
   public UserDTO getByUsername(String username) {
-    return modelMapper.map(userRepository.findByUsername(username).orElseThrow(
-        DataNotFoundException::new), UserDTO.class);
+    try {
+      return modelMapper.map(userRepository.findByUsername(username).orElseThrow(
+          DataNotFoundException::new), UserDTO.class);
+    }catch(Exception e) {
+      return null;
+    }
   }
   @Override
   public Collection<UserDTO> getAll() {
