@@ -62,11 +62,11 @@ public class TournamentController {
   }
 
   @PostMapping(value = "/addTournament")
-  public ResponseEntity<TournamentDTO> addTournament(@RequestBody TournamentFormDTO tournamentFormDTO) {
+  public ResponseEntity<MessageResponse> addTournament(@RequestBody TournamentFormDTO tournamentFormDTO) {
     TournamentDTO tournamentDTO = tournamentService.create(modelMapper.map(tournamentFormDTO, TournamentDTO.class));
     if(tournamentDTO == null)
-      return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-    return new ResponseEntity<>(tournamentDTO, HttpStatus.OK);
+      return new ResponseEntity<>(new MessageResponse("same name"), HttpStatus.BAD_REQUEST);
+    return new ResponseEntity<>(new MessageResponse("ok"), HttpStatus.OK);
   }
 
   @PostMapping(value = "/addTeam")
