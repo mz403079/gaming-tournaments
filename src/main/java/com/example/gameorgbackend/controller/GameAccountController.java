@@ -2,6 +2,7 @@ package com.example.gameorgbackend.controller;
 
 import com.example.gameorgbackend.model.dto.basic.GameAccountDTO;
 import com.example.gameorgbackend.model.dto.basic.TournamentDTO;
+import com.example.gameorgbackend.model.dto.specialized.MessageResponse;
 import com.example.gameorgbackend.model.entity.GameAccount;
 import com.example.gameorgbackend.model.service.GameAccountServiceImpl;
 import java.util.Collection;
@@ -29,11 +30,11 @@ public class GameAccountController {
   }
 
   @PostMapping(value = "/addGameAccount/{id}")
-  public ResponseEntity<GameAccountDTO> addTournament(@PathVariable("id") Long id, @RequestBody GameAccountDTO gameAccountDTO) {
+  public ResponseEntity<MessageResponse> addTournament(@PathVariable("id") Long id, @RequestBody GameAccountDTO gameAccountDTO) {
     gameAccountDTO = gameAccountService.create(gameAccountDTO, id);
     if(gameAccountDTO == null)
-      return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-    return new ResponseEntity<>(gameAccountDTO, HttpStatus.OK);
+      return new ResponseEntity<>(new MessageResponse("name taken"), HttpStatus.BAD_REQUEST);
+    return new ResponseEntity<>(new MessageResponse("ok"), HttpStatus.OK);
   }
 
   @DeleteMapping(value = "/deleteGameAccount/{id}")
