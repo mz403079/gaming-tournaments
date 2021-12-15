@@ -4,6 +4,7 @@ import com.example.gameorgbackend.exceptions.DataNotFoundException;
 import com.example.gameorgbackend.model.dto.basic.TeamDTO;
 import com.example.gameorgbackend.model.dto.basic.UserDTO;
 import com.example.gameorgbackend.model.entity.Team;
+import com.example.gameorgbackend.model.entity.Tournament;
 import com.example.gameorgbackend.model.entity.User;
 import com.example.gameorgbackend.model.repository.TeamRepository;
 import com.example.gameorgbackend.model.repository.TournamentRepository;
@@ -49,9 +50,10 @@ public class TeamServiceImpl implements IService<TeamDTO>{
   public String createGetRes(TeamDTO teamDTO) {
     try {
       Team team = modelMapper.map(teamDTO, Team.class);
-      team.setTournament(
-          tournamentRepository.findById(teamDTO.getTournament().getTournamentId()).orElseThrow(
-              DataNotFoundException::new));
+      Tournament tournament = tournamentRepository.findById(teamDTO.getTournament().
+          getTournamentId()).orElseThrow(
+          DataNotFoundException::new);
+      team.setTournament(tournament);
       Set<User> players = new HashSet<>();
       for (UserDTO player : teamDTO.getPlayers()) {
         players.add(userRepository.findById(player.getUserId()).orElseThrow(
@@ -63,6 +65,8 @@ public class TeamServiceImpl implements IService<TeamDTO>{
       for (User player : team.getPlayers()) {
         player.addTeam(team);
       }
+      tournament.setCurrentNumberOfTeams(tournament.getCurrentNumberOfTeams()+1);
+      tournamentRepository.save(tournament);
       teamRepository.save(team);
 
       return "ok";
